@@ -49,7 +49,7 @@
         },
         speed1: {
             label: 'Level 1',
-            icon: 'mdi:fan-speed-1',
+            icon: 'mdi:numeric-1',
             service: 'fan.set_preset_mode',
             service_data: {
                 preset_mode: 1
@@ -57,7 +57,7 @@
         },
         speed2: {
             label: 'Level 2',
-            icon: 'mdi:fan-speed-2',
+            icon: 'mdi:numeric-2',
             service: 'fan.set_preset_mode',
             service_data: {
                 preset_mode: 2
@@ -65,7 +65,7 @@
         },
         speed3: {
             label: 'Level 3',
-            icon: 'mdi:fan-speed-3',
+            icon: 'mdi:numeric-3',
             service: 'fan.set_preset_mode',
             service_data: {
                 preset_mode: 3
@@ -73,7 +73,7 @@
         },
         speed4: {
             label: 'Level 4',
-            icon: 'mdi:fan-speed-4',
+            icon: 'mdi:numeric-4',
             service: 'fan.set_preset_mode',
             service_data: {
                 preset_mode: 4
@@ -81,7 +81,7 @@
         },
         speed5: {
             label: 'Level 5',
-            icon: 'mdi:fan-speed-5',
+            icon: 'mdi:numeric-5',
             service: 'fan.set_preset_mode',
             service_data: {
                 preset_mode: 5
@@ -89,7 +89,7 @@
         },
         speed6: {
             label: 'Level 6',
-            icon: 'mdi:fan-speed-6',
+            icon: 'mdi:numeric-6',
             service: 'fan.set_preset_mode',
             service_data: {
                 preset_mode: 6
