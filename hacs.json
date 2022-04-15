@@ -1,5 +1,5 @@
 {
-  "name": "Home Assistant Xiaomi Fan Card",
-  "filename": "xiaomi-fan-card.js",
+  "name": "Home Assistant ikohs Fan Card",
+  "filename": "ikohs-fan-card.js",
   "render_readme": true
 }
