@@ -52,7 +52,7 @@
             icon: 'mdi:fan-speed-1',
             service: 'fan.set_preset_mode',
             service_data: {
-                preset_mode: 'Level 1'
+                preset_mode: 1
             }
         },
         speed2: {
@@ -60,7 +60,7 @@
             icon: 'mdi:fan-speed-2',
             service: 'fan.set_preset_mode',
             service_data: {
-                preset_mode: 'Level 2'
+                preset_mode: 2
             }
         },
         speed3: {
@@ -68,9 +68,33 @@
             icon: 'mdi:fan-speed-3',
             service: 'fan.set_preset_mode',
             service_data: {
-                preset_mode: 'Level 3'
+                preset_mode: 3
             }
-        }
+        },
+        speed4: {
+            label: 'Level 4',
+            icon: 'mdi:fan-speed-4',
+            service: 'fan.set_preset_mode',
+            service_data: {
+                preset_mode: 4
+            }
+        },
+        speed5: {
+            label: 'Level 5',
+            icon: 'mdi:fan-speed-5',
+            service: 'fan.set_preset_mode',
+            service_data: {
+                preset_mode: 5
+            }
+        },
+        speed6: {
+            label: 'Level 6',
+            icon: 'mdi:fan-speed-6',
+            service: 'fan.set_preset_mode',
+            service_data: {
+                preset_mode: 6
+            }
+        },        
     };
 
     const compute = {
