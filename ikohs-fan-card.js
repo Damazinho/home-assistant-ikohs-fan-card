@@ -11,9 +11,9 @@
             label: 'Power: ',
             icon: 'mdi:power',
         },
-        oscillating: {
-            key: 'oscillate',
-            label: 'Oscillating: ',
+        direction: {
+            key: 'direction',
+            label: 'Direction: ',
             icon: 'mdi:rotate-left',
         }
     };
@@ -23,15 +23,6 @@
             key: 'raw_speed',
             label: 'Fan speed level: ',
         },
-        mode: {
-            key: 'mode',
-            label: 'Modus: ',
-        },
-        offCountdown: {
-            key: 'delay_off_countdown',
-            label: 'Minutes left on off countdown: ',
-            unit: ' min'
-        }
     };
 
     const buttons = {
@@ -40,20 +31,20 @@
             icon: 'mdi:play-pause',
             service: 'fan.toggle'
         },
-        swivelOn: {
-            label: 'Oscillate',
+        direcForward: {
+            label: 'Rotate forward',
             icon: 'mdi:rotate-right',
-            service: 'fan.oscillate',
+            service: 'fan.direction',
             service_data: {
-                oscillating: true
+                direction: 'forward'
             }
         },
-        swivelOff: {
-            label: 'Stop moving',
+        direcReverse: {
+            label: 'Rotation reverse',
             icon: 'mdi:pause',
-            service: 'fan.oscillate',
+            service: 'fan.direction',
             service_data: {
-                oscillating: false
+                direction: 'reverse'
             }
         },
         speed1: {
