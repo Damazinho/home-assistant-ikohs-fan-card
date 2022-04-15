@@ -1,6 +1,6 @@
 ((LitElement) => {
     console.info(
-        '%c XIAOMI-FAN-CARD %c 1.0.0 ',
+        '%c IKOHS-FAN-CARD %c 1.0.0 ',
         'color: cyan; background: black; font-weight: bold;',
         'color: darkblue; background: white; font-weight: bold;',
     );
@@ -90,7 +90,7 @@
     const html = LitElement.prototype.html;
     const css = LitElement.prototype.css;
 
-    class XiaomiFanCard extends LitElement {
+    class IkohsFanCard extends LitElement {
 
         static get properties() {
             return {
@@ -304,5 +304,5 @@
         }
     }
 
-    customElements.define('xiaomi-fan-card', XiaomiFanCard);
+    customElements.define('ikohs-fan-card', IkohsFanCard);
 })(window.LitElement || Object.getPrototypeOf(customElements.get("hui-masonry-view") || customElements.get("hui-view")));
