@@ -20,7 +20,7 @@
 
     const attributes = {
         speed: {
-            key: 'raw_speed',
+            key: 'percentage',
             label: 'Fan speed level: ',
         },
     };
@@ -29,7 +29,7 @@
         onOff: {
             label: 'On/Off',
             icon: 'mdi:play-pause',
-            service: 'fan.toggle'
+            service: 'fan.toggle',
         },
         direcForward: {
             label: 'Rotate forward',
@@ -159,6 +159,8 @@
         }
 
         render() {
+            console.log(this.config); 
+		console.log("Has buttons: " + this.config.show.buttons);
             return this.stateObj ? html`
             <ha-card class="background" style="${this.config.styles.background}">
               ${this.config.show.name ?
@@ -212,9 +214,8 @@
             return data && data.show !== false
                 ? html`<ha-icon-button
                     @click="${() => this.callService(data.service, data.service_data)}"
-                    icon="${data.icon}"
                     title="${data.label || ''}"
-                    style="${this.config.styles.icon}"></ha-icon-button>`
+                    style="${this.config.styles.icon}"><ha-icon icon="${data.icon}"></ha-icon></ha-icon-button>`
                 : null;
         }
 
@@ -245,8 +246,9 @@
         setConfig(config) {
             if (!config.entity) throw new Error('Please define an entity.');
             if (config.entity.split('.')[0] !== 'fan') throw new Error('Please define a fan entity.');
+	    console.log(config);
 
-            this.config = {
+           this.config = {
                 name: config.name,
                 entity: config.entity,
                 show: {
@@ -279,9 +281,15 @@
         }
 
         callService(service, data) {
-            if (!data ||!data.entity_id) {
+	    console.log("Call service: " + service);
+	    if (!data) {  data = {}; }
+            if (!data.entity_id) {
+		console.log("State obj");
+		console.log(this.stateObj);
                 data.entity_id = this.stateObj.entity_id;
+
             }
+            console.log("Data: " + data);
             const [domain, name] = service.split('.');
             this._hass.callService(domain, name, data);
         }
