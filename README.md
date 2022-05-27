@@ -41,6 +41,10 @@ This image has to be saved in the `<config>/www/img` folder of your Home Assista
 The card shows the power state (on/off), the direction of the rotation (forward or backward) and the fan speed (in percentage).
 The buttons can be used to power the fan on or off (first button), to change the direction (second button), or set the fan speed levels.
 
+## TODO
+
+- Change the speed in the card to show the speed list and not the percentage.
+
 ## Disclaimer
 This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the ikohs nor with Home Assistant. The integration is delivered as-is and any feedback is welcome. 
 
