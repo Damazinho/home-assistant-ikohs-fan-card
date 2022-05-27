@@ -1,34 +1,46 @@
-# home-assistant-xiaomi-fan-card
-A custom card to integration Xiaomi fans with the Home Assistant lovelace UI
+# home-assistant-ikohs-fan-card
+A custom card to integrate ikohs fan into the Home Assistant lovelace UI. 
 
 ## Inspiration
-This custom card is based on the awesome work from the [lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card) repository and is written to visualize fans added to Home Assistant via the [Xiaomi_fan](https://github.com/syssi/xiaomi_fan) integration. I tested it with my model 1C fan but it should work with other fans using the same integration.
+This custom card is based on the code from the [xiaomi fan card](https://github.com/OliverHi/home-assistant-xiaomi-fan-card).
+It has been tested with an ikohs windcalm DC only using localtuya. 
 
 ## Installation
-You can manually install this card by adding the xiaomi-fan-card.js to your `<config>/www/` folder.
+You can manually install this card by adding the ikohs-fan-card.js to your `<config>/www/` folder.
 
-This card can also be installed via the [HACS]() community store. Install HACS and click the button on the top right. Select "Custom repositories" and add the URL `https://github.com/OliverHi/home-assistant-xiaomi-fan-card`. Now you should be able to find and install this card as `home-assistant-xiaomi-fan-card` via HACS.
+This card can also be installed via the [HACS]() community store. Install HACS and click the button on the top right. Select "Custom repositories" and add the URL `[https://github.com/OliverHi/home-assistant-xiaomi-fan-card](https://github.com/deese/home-assistant-ikohs-fan-card)`. Now you should be able to find and install this card as `home-assistant-ikohs-fan-card` via HACS.
 
 ## Usage
-The card has to be added via the raw configuration editor as yaml. You need to provide the entity id itself, everything else is optional.
+The card has to be added via the raw configuration editor as yaml. You need to provide the entity id itself and the list of speed modes available in your fan version.
+
 ```
-- type: 'custom:xiaomi-fan-card'
-  entity: fan.xiaomi_fan_1c
+- type: custom:ikohs-fan-card
+  entity: fan.ikohs_fan_windcalm
+  speed_modes:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+
 ```
-![fan-card-2](https://user-images.githubusercontent.com/9283757/124400052-fd665980-dd1f-11eb-8f06-f795ee0d6eab.PNG)
+
+![fan-card-1](https://user-images.githubusercontent.com/590758/170733534-b0a4cde0-9d01-4b5e-b3cd-54f103a51395.png)
+
 
 You can also add the same optional configurations as in the linked xiaomi vacuum card. I personally use the image config to add a background image to the card.
 ```
-- type: 'custom:xiaomi-fan-card'
-  entity: fan.xiaomi_fan_1c
-  image: /local/img/xiaomi_fan2.jpg
+- type: 'custom:ikohs-fan-card'
+  entity: fan.ikohs_fan_windcalm
+  image: /local/img/ikohs_fan.jpg
 ```
-![fan-card-1](https://user-images.githubusercontent.com/9283757/124400049-fa6b6900-dd1f-11eb-9f31-31dd6d34704a.PNG)
 
 This image has to be saved in the `<config>/www/img` folder of your Home Assistant installation.
 
-The card shows the power state (on/off), the oscillation state (moving or not), fan speed (level 1 to 3), current mode and the minutes left on the shutdown timer.
-The buttons can be used to power the fan on or off (first button), to enable the oscillation (second button), stop it (third button) or set the fan speed levels (button 3 to 6).
+The card shows the power state (on/off), the direction of the rotation (forward or backward) and the fan speed (in percentage).
+The buttons can be used to power the fan on or off (first button), to change the direction (second button), or set the fan speed levels.
 
 ## Disclaimer
-This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the Xiaomi Corporation, or any of its subsidiaries or its affiliates. The official Xiaomi website can be found at https://www.mi.com/global/.
+This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the ikohs nor with Home Assistant. The integration is delivered as-is and any feedback is welcome. 
+
