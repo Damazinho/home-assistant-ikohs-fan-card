@@ -19,7 +19,7 @@
     };
 
     const attributes = {
-        speed: {
+        percentage: {
             key: 'percentage',
             label: 'Fan speed level: ',
         },
@@ -47,54 +47,6 @@
                 direction: 'reverse'
             }
         },
-        speed1: {
-            label: 'Level 1',
-            icon: 'mdi:numeric-1',
-            service: 'fan.set_preset_mode',
-            service_data: {
-                preset_mode: 1
-            }
-        },
-        speed2: {
-            label: 'Level 2',
-            icon: 'mdi:numeric-2',
-            service: 'fan.set_preset_mode',
-            service_data: {
-                preset_mode: 2
-            }
-        },
-        speed3: {
-            label: 'Level 3',
-            icon: 'mdi:numeric-3',
-            service: 'fan.set_preset_mode',
-            service_data: {
-                preset_mode: 3
-            }
-        },
-        speed4: {
-            label: 'Level 4',
-            icon: 'mdi:numeric-4',
-            service: 'fan.set_preset_mode',
-            service_data: {
-                preset_mode: 4
-            }
-        },
-        speed5: {
-            label: 'Level 5',
-            icon: 'mdi:numeric-5',
-            service: 'fan.set_preset_mode',
-            service_data: {
-                preset_mode: 5
-            }
-        },
-        speed6: {
-            label: 'Level 6',
-            icon: 'mdi:numeric-6',
-            service: 'fan.set_preset_mode',
-            service_data: {
-                preset_mode: 6
-            }
-        },        
     };
 
     const compute = {
@@ -159,8 +111,6 @@
         }
 
         render() {
-            console.log(this.config); 
-		console.log("Has buttons: " + this.config.show.buttons);
             return this.stateObj ? html`
             <ha-card class="background" style="${this.config.styles.background}">
               ${this.config.show.name ?
@@ -189,34 +139,34 @@
             const isValidAttribute = data && data.key in this.stateObj.attributes;
             const isValidEntityData = data && data.key in this.stateObj;
 
-            const value = isValidAttribute
-                ? computeFunc(this.stateObj.attributes[data.key]) + (data.unit || '')
-                : isValidEntityData
-                    ? computeFunc(this.stateObj[data.key]) + (data.unit || '')
-                    : this._hass.localize('state.default.unavailable');
+            const value = isValidAttribute ?
+                computeFunc(this.stateObj.attributes[data.key]) + (data.unit || '') :
+                isValidEntityData ?
+                computeFunc(this.stateObj[data.key]) + (data.unit || '') :
+                this._hass.localize('state.default.unavailable');
             const attribute = html`<div>${data.icon && this.renderIcon(data)}${(data.label || '') + value}</div>`;
 
             const hasDropdown = `${data.key}_list` in this.stateObj.attributes;
 
-            return (hasDropdown && (isValidAttribute || isValidEntityData))
-                ? this.renderDropdown(attribute, data.key)
-                : attribute;
+            return (hasDropdown && (isValidAttribute || isValidEntityData)) ?
+                this.renderDropdown(attribute, data.key) :
+                attribute;
         }
 
         renderIcon(data) {
-            const icon = (data.key === 'battery_level' && 'battery_icon' in this.stateObj.attributes)
-                ? this.stateObj.attributes.battery_icon
-                : data.icon;
+            const icon = (data.key === 'battery_level' && 'battery_icon' in this.stateObj.attributes) ?
+                this.stateObj.attributes.battery_icon :
+                data.icon;
             return html`<ha-icon icon="${icon}" style="margin-right: 10px; ${this.config.styles.icon}"></ha-icon>`;
         }
 
         renderButton(data) {
-            return data && data.show !== false
-                ? html`<ha-icon-button
+            return data && data.show !== false ?
+                html`<ha-icon-button
                     @click="${() => this.callService(data.service, data.service_data)}"
                     title="${data.label || ''}"
-                    style="${this.config.styles.icon}"><ha-icon icon="${data.icon}"></ha-icon></ha-icon-button>`
-                : null;
+                    style="${this.config.styles.icon}"><ha-icon icon="${data.icon}"></ha-icon></ha-icon-button>` :
+                null;
         }
 
         renderDropdown(attribute, key) {
@@ -243,21 +193,48 @@
             return changedProps.has('stateObj');
         }
 
+        buildSpeedButtons(speed_modes) {
+            var speedButtons = {};
+
+
+            speed_modes.forEach(el =>
+                speedButtons['speed' + el] = {
+                    label: 'Level ' + el,
+                    icon: 'mdi:numeric-' + el,
+                    service: 'fan.set_percentage',
+                    service_data: {
+                        percentage: this.convert_to_perc(el, speed_modes)
+                    }
+                }
+            );
+
+            return speedButtons;
+        }
+
+        convert_to_perc(val, speed_modes) {
+            var list_len = speed_modes.length;
+            var list_position = speed_modes.findIndex(x => x == val) + 1;
+
+            return Math.floor((list_position * 100) / list_len)
+        }
+
         setConfig(config) {
             if (!config.entity) throw new Error('Please define an entity.');
             if (config.entity.split('.')[0] !== 'fan') throw new Error('Please define a fan entity.');
-	    console.log(config);
 
-           this.config = {
+            var buttons_l = Object.assign({}, buttons, this.buildSpeedButtons(config.speed_modes));
+
+            this.config = {
                 name: config.name,
                 entity: config.entity,
+                speed_modes: config.speed_modes,
                 show: {
                     name: config.name !== false,
                     state: config.state !== false,
                     attributes: config.attributes !== false,
                     buttons: config.buttons !== false,
                 },
-                buttons: this.deepMerge(buttons, config.buttons),
+                buttons: this.deepMerge(buttons_l, config.buttons),
                 state: this.deepMerge(state, config.state),
                 attributes: this.deepMerge(attributes, config.attributes),
                 styles: {
@@ -277,19 +254,20 @@
 
         handleChange(e, key) {
             const mode = e.target.getAttribute('value');
-            this.callService(`fan.set_${key}`, {entity_id: this.stateObj.entity_id, [key]: mode});
+            this.callService(`fan.set_${key}`, {
+                entity_id: this.stateObj.entity_id,
+                [key]: mode
+            });
         }
 
         callService(service, data) {
-	    console.log("Call service: " + service);
-	    if (!data) {  data = {}; }
+            if (!data) {
+                data = {};
+            }
             if (!data.entity_id) {
-		console.log("State obj");
-		console.log(this.stateObj);
                 data.entity_id = this.stateObj.entity_id;
 
             }
-            console.log("Data: " + data);
             const [domain, name] = service.split('.');
             this._hass.callService(domain, name, data);
         }
@@ -300,7 +278,9 @@
                 cancelable: options.cancelable || true,
                 composed: options.composed || true,
             });
-            event.detail = {entityId: this.stateObj.entity_id};
+            event.detail = {
+                entityId: this.stateObj.entity_id
+            };
             this.dispatchEvent(event);
         }
 
@@ -322,10 +302,8 @@
                     }
                 });
             });
-
             return target;
         }
     }
-
     customElements.define('ikohs-fan-card', IkohsFanCard);
 })(window.LitElement || Object.getPrototypeOf(customElements.get("hui-masonry-view") || customElements.get("hui-view")));
