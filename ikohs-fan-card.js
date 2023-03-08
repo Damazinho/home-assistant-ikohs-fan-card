@@ -28,7 +28,7 @@
     const buttons = {
         onOff: {
             label: 'On/Off',
-            icon: 'mdi:play-power',
+            icon: 'mdi:power',
             service: 'fan.toggle',
         },
         direcForward: {
