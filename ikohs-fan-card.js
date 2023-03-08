@@ -28,21 +28,21 @@
     const buttons = {
         onOff: {
             label: 'On/Off',
-            icon: 'mdi:play-pause',
+            icon: 'mdi:play-power',
             service: 'fan.toggle',
         },
         direcForward: {
             label: 'Rotate forward',
             icon: 'mdi:rotate-right',
-            service: 'fan.direction',
+            service: 'fan.set_direction',
             service_data: {
                 direction: 'forward'
             }
         },
         direcReverse: {
             label: 'Rotation reverse',
-            icon: 'mdi:pause',
-            service: 'fan.direction',
+            icon: 'mdi:rotate-left',
+            service: 'fan.set_direction',
             service_data: {
                 direction: 'reverse'
             }
