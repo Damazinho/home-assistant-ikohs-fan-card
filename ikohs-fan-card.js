@@ -1,6 +1,6 @@
 ((LitElement) => {
     console.info(
-        '%c IKOHS-FAN-CARD %c 1.0.0 ',
+        '%c IKOHS-FAN-CARD %c 1.0.1 ',
         'color: cyan; background: black; font-weight: bold;',
         'color: darkblue; background: white; font-weight: bold;',
     );
