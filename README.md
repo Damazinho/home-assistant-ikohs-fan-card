@@ -26,8 +26,7 @@ The card has to be added via the raw configuration editor as yaml. You need to p
 
 ```
 
-![fan-card-1](https://user-images.githubusercontent.com/590758/170733534-b0a4cde0-9d01-4b5e-b3cd-54f103a51395.png)
-
+![plafondventilator](https://user-images.githubusercontent.com/70435713/223839999-18330173-dc6f-49b0-9324-250b349b875f.PNG)
 
 You can also add the same optional configurations as in the linked xiaomi vacuum card. I personally use the image config to add a background image to the card.
 ```
