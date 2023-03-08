@@ -3,7 +3,7 @@ A custom card to integrate ikohs fan into the Home Assistant lovelace UI.
 
 ## Inspiration
 This custom card is based on the code from the [xiaomi fan card](https://github.com/OliverHi/home-assistant-xiaomi-fan-card).
-It has been tested with an ikohs windcalm DC only using localtuya. 
+It has been tested with an ikohs windcalm DC only using both localtuya & the official Tuya integration. 
 
 ## Installation
 You can manually install this card by adding the ikohs-fan-card.js to your `<config>/www/` folder.
