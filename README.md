@@ -8,7 +8,7 @@ It has been tested with an ikohs windcalm DC only using localtuya.
 ## Installation
 You can manually install this card by adding the ikohs-fan-card.js to your `<config>/www/` folder.
 
-This card can also be installed via the [HACS]() community store. Install HACS and click the button on the top right. Select "Custom repositories" and add the URL `[https://github.com/OliverHi/home-assistant-xiaomi-fan-card](https://github.com/deese/home-assistant-ikohs-fan-card)`. Now you should be able to find and install this card as `home-assistant-ikohs-fan-card` via HACS.
+This card can also be installed via the [HACS]() community store. Install HACS and click the button on the top right. Select "Custom repositories" and add the URL `(https://github.com/Damazinho/home-assistant-ikohs-fan-card)`. Now you should be able to find and install this card as `home-assistant-ikohs-fan-card` via HACS.
 
 ## Usage
 The card has to be added via the raw configuration editor as yaml. You need to provide the entity id itself and the list of speed modes available in your fan version.
